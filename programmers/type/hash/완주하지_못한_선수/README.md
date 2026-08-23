@@ -1,4 +1,6 @@
-## (level 1) [완주하지 못한 선수](https://school.programmers.co.kr/learn/courses/30/lessons/42576)
+## (level_1) 완주하지 못한 선수
+
+https://school.programmers.co.kr/learn/courses/30/lessons/42576
 
 ### 문제 설명
 
@@ -37,14 +39,13 @@
 ### 풀이 방법
 
 1. `participant`: 참가자 배열, `completion`: 완주자 배열, `map`: (키, 값) 해시맵
-  - map.get: 키값 반환
-  - map.put: 요소의 키값 수정
-  - map.getOrDefault(): 요소가 없으면 지정된 상수를 반환, 요소가 있으면 해당 키값을 반환
-
+  - `map.get`: 키값 반환
+  - `map.put`: 요소의 키값 수정
+  - `map.getOrDefault()`: 요소가 없으면 지정된 상수를 반환, 요소가 있으면 해당 키값을 반환
 
 2. 이름별 카운트 증가
   - **map.getOrDefault()** 로 participant 배열의 요소가 키에 없으면 0을 반환하고 키값에 +1  
-  요소가 키에 있는 있으면 저장된 키값을 반환하고 +1
+  요소가 키에 있으면 저장된 키값을 반환하고 +1
 
 3. 이름별 카운트 감소
   - 완주한 선수들의 이름을 map의 키에서 찾아 키값을 -1
@@ -77,54 +78,6 @@ class Solution {
             }
         }
         return answer;
-    }
-}
-```
-
-```java
-import java.io.*;
-import java.util.*;
-
-public class Main {
-    public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        // 입력
-        int N = Integer.parseInt(br.readLine());
-        StringTokenizer st = new StringTokenizer(br.readLine());
-
-        String[] participant = new String[N];
-        for (int i=0; i<N; i++) {
-            participant[i] = st.nextToken();
-        }
-
-        int M = Integer.parseInt(br.readLine());
-        st = new StringTokenizer(br.readLine());
-
-        String[] completion = new String[M];
-        for (int i=0; i<M; i++) {
-            completion[i] = st.nextToken();
-        }
-
-        // 풀이
-        HashMap<String, Integer> map = new HashMap<>();
-
-        for (String p : participant) {
-            map.put(p, map.getOrDefault(p, 0) + 1);
-        }
-
-        for (String c : completion) {
-            map.put(c, map.get(c) - 1);
-        }
-
-        String answer = "";
-        for (String p : participant) {
-            if (map.get(p) > 0) {
-                answer = p;
-                break;
-            }
-        }
-
-        System.out.println(answer);
     }
 }
 ```
