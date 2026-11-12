@@ -27,11 +27,20 @@ https://school.programmers.co.kr/learn/courses/30/lessons/42746?language=java
 
 ### 풀이 방법
 
-- numbers의 모든 숫자를 문자열로 변환한다. (10 → "10")
+- numbers의 모든 숫자를 String.valueOf()로 문자열 변환 (10 -> "10")
 
 - 두 숫자를 각각 AB, BA로 이어 붙여 비교하고, 더 큰 숫자가 만들어지는 순서로 전체 배열을 정렬한다.
+```
+[10]           → 시작
+3 넣기: 10 vs 3 → 310 > 103 → 3이 앞      → [3, 10]
+9 넣기: 3 vs 9  → 93 > 39   → 9가 앞      → [9, 3, 10]
+2 넣기: 10 vs 2 → 210 > 102 → 2가 앞
+        3 vs 2  → 32 > 23   → 3이 앞      → [9, 3, 2, 10]
+```
 
-- 정렬된 문자열을 전부 이어 붙여 반환한다. 단, 결과가 "000"처럼 0으로만 이루어졌다면 "0"을 반환한다.
+- 결과가 "000"처럼 0으로만 이루어지는 경우 0 반환 (즉 arr[0]이 0인 경우)
+
+- 정렬된 문자열을 전부 이어 붙여 반환한다.
 
 ```java
 import java.util.*;
@@ -47,7 +56,8 @@ class Solution {
         }
 
         Arrays.sort(arr, (a, b) -> (b + a).compareTo(a + b));
-        // (b+a)가 (a+b)보다 크면 b가 앞, (a+b)가 (b+a)보다 크면 a가 앞
+        // (b+a) - (a+b) > 0 이면 b가 앞, < 0 이면 a가 앞
+        // 이 정렬은 a, b가 string일 때만 가능, int는 불가 (compareTo 도 int는 불가능)
 
         if (arr[0].equals("0")) {
             return "0";
