@@ -29,10 +29,30 @@ H-Index는 과학자의 생산성과 영향력을 나타내는 지표입니다. 
 
 ### 풀이 방법
 
-- 
+- Arrays.sort로 인용횟수 오름차순 정렬
 
-- 
+- citations[i] = 현재 논문 인용횟수, citations.length-i = 인용횟수가 현재 논문과 같거나 많은 논문 수 
+
+- citations[i] >= citations.length-i인 경우 answer=citations.length-i 이후 반복문 break
 
 ```java
+import java.util.Arrays;
 
+class Solution {
+    public int solution(int[] citations) {
+        int answer = 0;
+        
+        Arrays.sort(citations);
+        
+        for (int i=0; i<citations.length; i++) {
+            if (citations[i] >= citations.length-i) {
+                answer = citations.length-i;
+                break;
+            }
+        }
+        
+        
+        return answer;
+    }
+}
 ```
